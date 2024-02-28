@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:get_it_demo/locator.dart';
 import 'package:get_it_demo/repository/stream_repo.dart';
 
@@ -16,7 +15,7 @@ class _StreamCountState extends State<StreamCount> {
   void dispose() {
     debugPrint('Object is unregister');
     /// Whenever we called unregister it will called dispose method
-    getIt.unregister<StreamRepo>();
+    getIt.reset(dispose: true);
     super.dispose();
   }
 

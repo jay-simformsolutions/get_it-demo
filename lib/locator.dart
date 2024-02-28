@@ -2,22 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:get_it_demo/domain/meme_controller.dart';
 import 'package:get_it_demo/repository/meme_repo.dart';
+import 'package:get_it_demo/repository/random_num_repo.dart';
 import 'package:get_it_demo/repository/stream_repo.dart';
-
 
 final getIt = GetIt.I;
 
-Future<void> setup() async{
+Future<void> setup() async {
+  getIt.allowReassignment = true;
 
-  getIt.registerLazySingleton(() {
-    debugPrint('New Object is created for Stream Repo');
-    return StreamRepo();
-  },
+  getIt.registerLazySingleton<StreamRepo>(
+    () {
+      debugPrint('New Object is created for Stream Repo');
+      return StreamRepo();
+    },
+
     /// Called when we unregister the object
     dispose: (param) {
-    debugPrint('Check need to resource release');
-    param.textEditingController.dispose();
-    debugPrint('Text Editing Controller is released');
+      debugPrint('Check need to resource release');
+      param.textEditingController.dispose();
+      debugPrint('Text Editing Controller is released');
     },
   );
 
@@ -27,9 +30,14 @@ Future<void> setup() async{
     return MemeRepo();
   });
 
-
   getIt.registerLazySingleton<MemeController>(() {
     debugPrint('New object is registered with MemeController');
     return MemeController();
   });
+
+  getIt.registerFactory<RandomNumberRepo>(
+    () {
+      return RandomNumberRepo();
+    },
+  );
 }
