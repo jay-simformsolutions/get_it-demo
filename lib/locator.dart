@@ -7,7 +7,6 @@ final getIt = GetIt.I;
 
 Future<void> setup() async {
   getIt.allowReassignment = true;
-
   getIt.registerLazySingleton<MemeRepo>(() => MemeRepo());
 
   getIt.registerLazySingleton<MemeController>(() => MemeController());

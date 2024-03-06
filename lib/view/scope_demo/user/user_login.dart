@@ -36,7 +36,14 @@ class _UserLoginState extends State<UserLogin> {
         backgroundColor: Colors.white,
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            debugPrint(
+                'Current Scope name in UserLogin page is ${getIt.currentScopeName}');
+            if(getIt.hasScope('user')){
+              getIt.popScope();
+              Navigator.pop(context);
+            }else{
+              Navigator.pop(context);
+            }
           },
           icon: const Icon(
             Icons.arrow_back_ios,
@@ -93,12 +100,24 @@ class _UserLoginState extends State<UserLogin> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const AdminWidget(),
-                    ),
-                  );
+                  getIt.dropScope('user');
+                  if(getIt.hasScope('admin')){
+                    getIt.popScope();
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const AdminWidget(),
+                      ),
+                    );
+                  }else{
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const AdminWidget(),
+                      ),
+                    );
+                  }
+
                 },
                 child: const Text('Switch to Admin'),
               ),

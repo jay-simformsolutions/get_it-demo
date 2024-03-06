@@ -23,6 +23,7 @@ class _AdminWidgetState extends State<AdminWidget> {
         debugPrint('Controller is Dispose');
         adminUserName.dispose();
         adminPassword.dispose();
+        getIt.unregister<CounterRepo>();
       },
       init: (getIt) {
         getIt.registerLazySingleton(() => CounterRepo());
@@ -39,7 +40,12 @@ class _AdminWidgetState extends State<AdminWidget> {
         backgroundColor: Colors.white,
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            debugPrint('Current Scope name in Admin page is ${getIt.currentScopeName}');
+            if(getIt.hasScope('admin')){
+              Navigator.pop(context);
+            }else{
+              Navigator.pop(context);
+            }
           },
           icon: const Icon(
             Icons.arrow_back_ios,
@@ -76,27 +82,34 @@ class _AdminWidgetState extends State<AdminWidget> {
                   ),
                 ],
               ),
-              const SizedBox(height: 16,),
-              Text(
-                  getIt.get<CounterRepo>().counter.toString(),
+              const SizedBox(
+                height: 16,
               ),
-              const SizedBox(height: 16,),
+              Text(
+                getIt.get<CounterRepo>().counter.toString(),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  IconButton(onPressed: (){
-                    getIt.get<CounterRepo>().increment();
-                    setState(() {});
-                  }, icon: const Icon(Icons.add)),
-                  IconButton(onPressed: (){
-                    getIt.get<CounterRepo>().increment();
-                    setState(() {});
-                  }, icon: const Icon(Icons.remove)),
+                  IconButton(
+                      onPressed: () {
+                        getIt.get<CounterRepo>().increment();
+                        setState(() {});
+                      },
+                      icon: const Icon(Icons.add)),
+                  IconButton(
+                      onPressed: () {
+                        getIt.get<CounterRepo>().decrement();
+                        setState(() {});
+                      },
+                      icon: const Icon(Icons.remove)),
                 ],
               ),
               ElevatedButton(
-                onPressed: () {
-                },
+                onPressed: () {},
                 child: const Text('Login as Admin'),
               ),
               const SizedBox(
@@ -104,16 +117,17 @@ class _AdminWidgetState extends State<AdminWidget> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  if(getIt.hasScope('user')){
-                    getIt.popScopesTill('user',inclusive: false);
-                    Navigator.push(
+                  getIt.dropScope('admin');
+                  if (getIt.hasScope('user')) {
+                    debugPrint('User scope is already present in admin page and need to remove it');
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (_) => const UserLogin(),
                       ),
                     );
-                  }else{
-                    Navigator.push(
+                  } else {
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (_) => const UserLogin(),
