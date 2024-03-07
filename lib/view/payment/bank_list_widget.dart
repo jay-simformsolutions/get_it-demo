@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get_it_demo/locator.dart';
+import 'package:get_it_demo/locator/locator.dart';
 
 import '../../repository/payment/payment_bank_model.dart';
 

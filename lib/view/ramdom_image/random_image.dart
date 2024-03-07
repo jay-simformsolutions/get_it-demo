@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it_demo/domain/meme_controller.dart';
 import 'package:get_it_demo/domain/model/photos.dart';
-import 'package:get_it_demo/locator.dart';
+import 'package:get_it_demo/locator/locator.dart';
 
 class RandomImage extends StatefulWidget {
   const RandomImage({super.key});

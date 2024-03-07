@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get_it_demo/const.dart';
-import 'package:get_it_demo/locator.dart';
+import 'package:get_it_demo/locator/locator.dart';
 import 'package:get_it_demo/repository/payment/payment_bank_model.dart';
 import 'package:get_it_demo/view/home_view_widget.dart';
 
