@@ -30,11 +30,11 @@ class _HomeViewWidgetState extends State<HomeViewWidget> {
               child: const Text('Api Calling with Get_it'),
             ),
             ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const UserLogin()),
-                );
+              onPressed: () async{
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const UserLogin()),
+                  );
               },
               child: const Text('Scope Concept'),
             ),

@@ -1,4 +1,4 @@
-import 'package:get_it_demo/locator.dart';
+import 'package:get_it_demo/locator/locator.dart';
 import 'package:get_it_demo/repository/meme_repo.dart';
 
 import 'model/photos.dart';
