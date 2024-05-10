@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it_demo/view/payment/payment_screen.dart';
 import 'package:get_it_demo/view/ramdom_image/random_image.dart';
 import 'package:get_it_demo/view/scope_demo/user/user_login.dart';
+import 'package:get_it_demo/view/shadow_object_widget/shadow_object_class1.dart';
 
 class HomeViewWidget extends StatefulWidget {
   const HomeViewWidget({super.key});
@@ -46,6 +47,14 @@ class _HomeViewWidgetState extends State<HomeViewWidget> {
                 );
               },
               child: const Text('Make Payment'),
+            ),ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const ShadowObjectClassWidget1()),
+                );
+              },
+              child: const Text('Shadow Concept'),
             ),
           ],
         ),
